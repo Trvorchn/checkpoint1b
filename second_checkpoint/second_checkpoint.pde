@@ -18,22 +18,61 @@ color black = #000000;
 color lightgrey  = #B5C0D0;
 color darkGrey  = #222222;
 color grey  = #3b3b3b;
+color moongrey = #94908D;
 
 // shades ==================================
 float moonX;
+float sunX;
 boolean night;
 
 
 void setup() {
 
+  night = true;
 
   size(800, 800);
 
   moonX = 150;
+  sunX = 150;
 }
 
 void draw() {
-  background(black);
+
+
+  //declaration
+  if  ( moonX > 830) {
+    night = false;
+  }
+  if (0 < moonX ) {
+    night = true;
+  }
+
+
+
+
+  //animation
+
+  if (night == true) {
+
+    //moon
+    background(black);
+    fill(moongrey);
+    circle(moonX, 100, 150);
+    fill(moongrey, 25);
+    circle(moonX, 100, 200);
+
+    moonX = moonX + 2;
+  } else if (night == false) {
+
+    background(skyblue);
+    fill(yellow);
+    circle (sunX, 100, 150);
+    fill(yellow, 50);
+    circle(sunX, 100, 200);
+
+    sunX = sunX + 2;
+  }
+
 
   //ground
   noStroke();
@@ -94,19 +133,4 @@ void draw() {
   rect(700, 200, 10, 400);
   rect(600, 200, 100, 10);
   triangle(600, 200, 575, 250, 625, 250);
-
-
-  if (night == true) {
-    //moon
-    circle(moonX, 100, 150);
-
-    //moon animation
-    moonX = moonX + 0.5;
-    if (moonX > width + 50) {
-      moonX = -100;
-    }
-  } else if (night == false){
-  background(skyblue);
-  
-  }
 }
