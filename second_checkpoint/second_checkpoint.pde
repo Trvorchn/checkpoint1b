@@ -24,55 +24,71 @@ color moongrey = #94908D;
 float moonX;
 float sunX;
 boolean night;
-
+boolean phase; 
 
 void setup() {
 
+  
+      
+      
   night = true;
-
+  phase = true;
   size(800, 800);
 
-  moonX = 150;
-  sunX = 150;
+  moonX = -50;
+  sunX = -50;
 }
 
 void draw() {
 
+ moonX = moonX + 2;
+ sunX = sunX + 2;
+      
+//night and day
+  if (moonX < 900){
+  phase = false;
 
-  //declaration
-  if  ( moonX > 830) {
-    night = false;
+  
+  }else if (moonX > 900){
+  phase = true;
+
   }
-  if (0 < moonX ) {
-    night = true;
+  
+  if (phase == false){
+      background(black);
+  
+  } else if (phase == true){
+     night = false;
+      background(skyblue);
+  
   }
-
-
-
+  
 
   //animation
 
   if (night == true) {
 
     //moon
-    background(black);
     fill(moongrey);
     circle(moonX, 100, 150);
     fill(moongrey, 25);
     circle(moonX, 100, 200);
 
-    moonX = moonX + 2;
+    
   } else if (night == false) {
 
-    background(skyblue);
     fill(yellow);
     circle (sunX, 100, 150);
     fill(yellow, 50);
     circle(sunX, 100, 200);
-
-    sunX = sunX + 2;
+    
   }
+ 
+  if (moonX > 1800){
+    moonX = -100;
+ 
 
+  }
 
   //ground
   noStroke();
@@ -133,4 +149,6 @@ void draw() {
   rect(700, 200, 10, 400);
   rect(600, 200, 100, 10);
   triangle(600, 200, 575, 250, 625, 250);
+  
+  println(moonX);
 }
