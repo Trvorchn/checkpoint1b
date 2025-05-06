@@ -38,7 +38,7 @@ class Asteroid extends GameObject {
   void show() {
 
     fill(black);
-    stroke(red);
+    stroke(random(0, 255), random(0, 255));
     strokeWeight(3);
     pushMatrix();
     translate(loc.x, loc.y);

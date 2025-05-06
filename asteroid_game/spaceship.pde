@@ -7,7 +7,6 @@ class Spaceship  extends GameObject {
   float angle = 0;
   float radius;
 
-
   Spaceship() {
     super(width/2, height/2, 0, 0);
     vel.setMag(1);
@@ -20,24 +19,30 @@ class Spaceship  extends GameObject {
   }
 
   void show() {
-    pushMatrix();
-    translate(loc.x, loc.y);
-    rotate(dir.heading());
-    drawShip();
-    popMatrix();
+      pushMatrix();
+      translate(loc.x, loc.y);
+      rotate(dir.heading());
+      drawShip();
+      popMatrix();
+
   }
+
+
+
+
+
+
+
+
+
+
+
 
 
   void drawShip() {
 
-    if(upkey) {
-    
-    
-    }
-    
-    
-    
-    
+
+
     if ( invTimer > 0) {
       radius = 60 + 15 * sin(angle);
       angle += 0.05;  // increase angle for next frame
@@ -61,6 +66,15 @@ class Spaceship  extends GameObject {
     line(-15, 20, 0, 20);
     line(-15, -20, 0, -20);
     circle(0, 0, 5);
+    
+    if (upkey){
+    
+    }
+    
+    
+    
+    
+    
   }
 
   void act() {
@@ -69,30 +83,28 @@ class Spaceship  extends GameObject {
     checkForCollisions();
     wrapAround();
     invincibleTimer();
-    superhot();
-    
-    
-  if (vel.mag() > 0.1) {
-    timeShouldMove = true;
-  }
-    
-    
   }
 
   void move() {
-    loc.add(vel);
-    float topSpeed = 5;
+      loc.add(vel);
+      float topSpeed = 1;
 
-    if (vel.mag() > topSpeed) {
-      vel.setMag(topSpeed);
-    }
+      if (vel.mag() > topSpeed) {
+        vel.setMag(topSpeed);
+      }
 
-    if (upkey)vel.add(dir);
-    if (leftkey)dir.rotate(-radians(3));
-    if (rightkey)dir.rotate(radians(3));
-        if (downkey)vel.sub(dir);
+      if (upkey)vel.add(dir);
+      if (leftkey)dir.rotate(-radians(3));
+      if (rightkey)dir.rotate(radians(3));
+          if (downkey)vel.sub(dir);
 
-  }
+
+ }
+
+
+
+
+
   void shoot() {
     cooldown--;
     if (spacekey && cooldown <= 0) {
@@ -110,6 +122,10 @@ class Spaceship  extends GameObject {
         if (dist(loc.x, loc.y, obj.loc.x, obj.loc.y) < d/2 + obj.d/2) {
           lives = lives - 1;
           obj.lives = 0;
+          player1.loc = new PVector(width/2, height/2);
+          player1.vel.set(0, 0);
+        }
+        if (lives == 0) {
           mode = GAMEOVER;
         }
       }

@@ -22,7 +22,7 @@ Spaceship player1;
 
 //list of bullets
 ArrayList <GameObject> objects;
- 
+
 boolean timeShouldMove = false;
 
 
@@ -38,14 +38,14 @@ void setup() {
   objects = new ArrayList();
   player1 = new Spaceship();
   objects.add(player1);
-objects.add(new Asteroid());
-objects.add(new Asteroid());
-objects.add(new Asteroid());
-objects.add(new Asteroid());
-objects.add(new Asteroid());
-objects.add(new Asteroid());
-objects.add(new Asteroid());
-objects.add(new Asteroid());
+  objects.add(new Asteroid());
+  objects.add(new Asteroid());
+  objects.add(new Asteroid());
+  objects.add(new Asteroid());
+  objects.add(new Asteroid());
+  objects.add(new Asteroid());
+  objects.add(new Asteroid());
+  objects.add(new Asteroid());
 
   numstars = 100;
   theStars = new star[numstars];
@@ -63,7 +63,7 @@ objects.add(new Asteroid());
 
 void draw() {
 
-//println(objects.size());
+  //println(objects.size());
   if (mode == INTRO) {
     intro();
   } else if (mode == GAME) {
