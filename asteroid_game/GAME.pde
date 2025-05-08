@@ -1,15 +1,21 @@
+
+int lives;
+
+
 void game() {
   background(black);
-  
+  lives = 3;
   strokeWeight(2);
   fill(white);
   rect(750, 750, 20, 20);
-  textSize(10);
+  textSize(20);
   text("PAUSE", 750, 775);
   
-  
-  
 
+  
+  
+  
+ 
   int i = 0;
   while (i < objects.size()) {
     GameObject currentObject= objects.get(i);
