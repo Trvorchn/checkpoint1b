@@ -9,6 +9,12 @@ class Spaceship  extends GameObject {
   float part;
   float d;
 
+  int teleportCooldown = 0;
+  final int maxTeleportCooldown = 300;
+  boolean canTeleport = true;
+
+
+
   Spaceship() {
 
     super(width/2, height/2, 0, 0, 1);
@@ -27,6 +33,7 @@ class Spaceship  extends GameObject {
     rotate(dir.heading());
     drawShip();
     popMatrix();
+    drawCooldownBar();
   }
 
 
@@ -83,6 +90,15 @@ class Spaceship  extends GameObject {
     checkForCollisions();
     wrapAround();
     invincibleTimer();
+    brake();
+    teleport();
+    if (!canTeleport) {
+      teleportCooldown--;
+      if (teleportCooldown <= 0) {
+        canTeleport = true;
+        teleportCooldown = 0;
+      }
+    }
   }
 
   void move() {
@@ -139,8 +155,60 @@ class Spaceship  extends GameObject {
 
   void brake() {
     if (ekey) {
-      
-      
+      vel.set(0, 0);
     }
+  }
+  void teleport() {
+    if (qkey && canTeleport) {
+      PVector newLoc = new PVector();
+      boolean safe = false;
+
+      while (safe == false) {
+        float newX = random(0, width);
+        float newY = random(0, height);
+        newLoc.set(newX, newY);
+        safe = true;
+
+        int i = 0;
+        while (i < objects.size()) {
+          GameObject obj = objects.get(i);
+          if (obj instanceof Asteroid) {
+            float d = dist(newLoc.x, newLoc.y, obj.loc.x, obj.loc.y);
+            if (d < 200) {
+              safe = false;
+              break; // exit
+            }
+          }
+          i++;
+        }
+      }
+
+      loc.set(newLoc);
+      canTeleport = false;
+      teleportCooldown = maxTeleportCooldown;
+  
+  }
+  }
+
+  void drawCooldownBar() {
+    float barWidth = 100, barHeight = 10;
+    float x = width - barWidth - 20, y = 20;
+    float fillBar = (maxTeleportCooldown - teleportCooldown) / (float)maxTeleportCooldown;
+    int barColor;
+
+
+    if (canTeleport) {
+      barColor = color(0, 255, 0);
+    } else {
+      barColor = color(255, 0, 0);
+    }
+
+    stroke(255);
+    noFill();
+    rect(x, y, barWidth, barHeight);
+
+    noStroke();
+    fill(barColor);
+    rect(x, y, barWidth * fillBar, barHeight);
   }
 }

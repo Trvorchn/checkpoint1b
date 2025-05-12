@@ -10,12 +10,12 @@ void game() {
   rect(750, 750, 20, 20);
   textSize(20);
   text("PAUSE", 750, 775);
-  
 
-  
-  
-  
- 
+
+
+
+
+
   int i = 0;
   while (i < objects.size()) {
     GameObject currentObject= objects.get(i);
@@ -34,5 +34,5 @@ void game() {
 
 
 void gameClicks() {
-   if (mouseX > 730 && mouseX < 770 && mouseY > 730 && mouseY < 770) mode = PAUSE;
+  if (mouseX > 730 && mouseX < 770 && mouseY > 730 && mouseY < 770) mode = PAUSE;
 }

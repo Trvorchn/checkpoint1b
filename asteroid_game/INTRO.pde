@@ -33,13 +33,13 @@ void intro() {
 void introClicks() {
   if (mouseX > 350  && mouseX < 450 && mouseY > 475 && mouseY < 525) {
     mode = GAME;
-    
+
     reset();
   }
 }
-void reset(){
+void reset() {
   lives = 3;
- objects = new ArrayList();
+  objects = new ArrayList();
   player1 = new Spaceship();
   objects.add(player1);
   objects.add(new Asteroid());
@@ -50,7 +50,4 @@ void reset(){
   objects.add(new Asteroid());
   objects.add(new Asteroid());
   objects.add(new Asteroid());
-
-
-
 }

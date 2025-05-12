@@ -11,7 +11,6 @@ void pause() {
   fill(black);
   text("HOME", width/2, height/2+100);
   noStroke();
-
 }
 void pauseClicks() {
 
